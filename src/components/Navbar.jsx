@@ -127,7 +127,7 @@ const Navbar = () => {
       </ToggleButton>
       <NavbarLinks isOpen={isOpen}>
         <NavbarLink to="/" onClick={() => setIsOpen(false)}>Home</NavbarLink>
-        <NavbarLink to="/about" onClick={() => setIsOpen(false)}>About</NavbarLink>
+        {/* <NavbarLink to="/about" onClick={() => setIsOpen(false)}>About</NavbarLink> */}
         <NavbarLink to="/pdf" onClick={() => setIsOpen(false)}>PDF Viewer</NavbarLink>
       </NavbarLinks>
     </NavbarWrapper>
