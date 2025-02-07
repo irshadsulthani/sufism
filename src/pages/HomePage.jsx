@@ -1,82 +1,94 @@
-import styled, { createGlobalStyle } from 'styled-components';
+import styled, { keyframes } from 'styled-components';
+import GlobalStyle from '../styles/GlobalStyles';
 
-const GlobalStyles = createGlobalStyle`
-  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
-  
-  * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Poppins', sans-serif;
+// Background Animation
+const fadeIn = keyframes`
+  from {
+    opacity: 0;
+    transform: scale(1.02);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
   }
 `;
 
+// Hero Section
 const HeroSection = styled.section`
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 85vh;
-  background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.7)), url('https://via.placeholder.com/1400x800') no-repeat center center/cover;
+  height: 90vh;
+  background: linear-gradient(135deg, #1e3c72, #2a5298);
   color: white;
   text-align: center;
   padding: 50px;
-  border-bottom: 8px solid rgba(255, 255, 255, 0.2);
   position: relative;
   overflow: hidden;
+  box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.5);
+  animation: ${fadeIn} 1s ease-in-out;
+  font-family: 'Poppins', sans-serif;
 
   .hero-content {
-    max-width: 700px;
+    max-width: 800px;
     z-index: 2;
-    text-shadow: 3px 3px 8px rgba(0,0,0,0.5);
+    text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.6);
   }
 
   h1 {
-    font-size: 60px;
+    font-size: 4rem;
     font-weight: 700;
+    text-transform: uppercase;
     letter-spacing: 2px;
-    animation: fadeInDown 1s ease-in-out;
-  }
-
-  p {
-    font-size: 22px;
-    margin-bottom: 30px;
-    animation: fadeInUp 1s ease-in-out;
-  }
-
-  .cta-button {
-    background: #ffcc00;
-    color: #222;
-    padding: 14px 32px;
-    font-size: 20px;
-    font-weight: 600;
-    border-radius: 50px;
-    text-decoration: none;
-    transition: 0.3s ease-in-out;
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
-    
-    &:hover {
-      background: #ff9900;
-      transform: scale(1.05);
-    }
-  }
-`;
-
-const ContentSection = styled.section`
-  padding: 80px 20px;
-  background: #f9f9f9;
-  text-align: center;
-
-  h2 {
-    font-size: 42px;
-    font-weight: 700;
-    color: #333;
     margin-bottom: 20px;
   }
 
   p {
-    font-size: 20px;
-    color: #555;
-    margin-bottom: 50px;
+    font-size: 1.6rem;
+    margin-bottom: 30px;
+  }
+
+  .cta-button {
+    background: linear-gradient(90deg, #ff7f50, #ff4500);
+    color: #fff;
+    padding: 16px 45px;
+    font-size: 1.3rem;
+    font-weight: 700;
+    border-radius: 30px;
+    text-decoration: none;
+    transition: 0.3s ease-in-out;
+    box-shadow: 0 4px 12px rgba(255, 127, 80, 0.5);
+    font-family: 'Poppins', sans-serif;
+    
+    &:hover {
+      background: linear-gradient(90deg, #ff4500, #e63946);
+      transform: scale(1.05);
+      box-shadow: 0 6px 18px rgba(255, 69, 0, 0.6);
+    }
+  }
+`;
+
+// Content Section
+const ContentSection = styled.section`
+  padding: 100px 10%;
+  background: linear-gradient(180deg, #1e3c72, #2a5298);
+  text-align: center;
+  font-family: 'Poppins', sans-serif;
+  color: white;
+
+  h2 {
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+  }
+
+  p {
+    font-size: 1.3rem;
+    margin-bottom: 40px;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
   }
 
   .split-container {
@@ -88,31 +100,40 @@ const ContentSection = styled.section`
 
   .card {
     background: white;
-    padding: 20px;
-    border-radius: 12px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-    max-width: 400px;
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    max-width: 420px;
     text-align: left;
-    transition: transform 0.3s;
+    transition: transform 0.3s, box-shadow 0.3s;
+    cursor: pointer;
+    color: #333;
+    font-family: 'Poppins', sans-serif;
     
     &:hover {
-      transform: translateY(-5px);
+      transform: translateY(-7px);
+      box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
     }
 
     img {
       width: 100%;
-      border-radius: 10px;
-      margin-bottom: 15px;
+      border-radius: 12px;
+      margin-bottom: 20px;
+      transition: transform 0.3s;
+    }
+
+    &:hover img {
+      transform: scale(1.05);
     }
 
     h3 {
-      font-size: 24px;
-      margin-bottom: 10px;
+      font-size: 1.9rem;
+      margin-bottom: 12px;
     }
 
     p {
-      font-size: 18px;
-      color: #777;
+      font-size: 1.2rem;
+      color: #555;
     }
   }
 `;
@@ -120,7 +141,7 @@ const ContentSection = styled.section`
 const HomePage = () => {
   return (
     <div>
-      <GlobalStyles />
+      <GlobalStyle />
       <HeroSection>
         <div className="hero-content">
           <h1>Welcome to Sufi World</h1>
