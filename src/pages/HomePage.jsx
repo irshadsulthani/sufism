@@ -138,8 +138,8 @@ const HomePage = () => {
       <GlobalStyle />
       <HeroSection>
         <div className="hero-content">
-          <h1>Welcome to Sulthaniya Family</h1>
-          <p>Connect with knowledge, spirituality, and faith. Embark on a journey of wisdom and inner peace.</p>
+          <h1 style={{color : '#ffff'}} >Welcome to Sulthaniya Family</h1>
+          <p style={{color : '#ffff'}} >Connect with knowledge, spirituality, and faith. Embark on a journey of wisdom and inner peace.</p>
           <a href="#explore" className="cta-button">Explore More</a>
         </div>
       </HeroSection>
