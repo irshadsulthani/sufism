@@ -159,18 +159,21 @@ const PDFPage = () => {
   };
 
   const openFullScreen = () => {
-    if (pdfRef.current) {
+    if (window.innerWidth <= 768) { // Detect mobile screens
+      window.open(pdfFiles[activeTab].src, "_blank");
+    } else if (pdfRef.current) { // Desktop fullscreen mode
       if (pdfRef.current.requestFullscreen) {
         pdfRef.current.requestFullscreen();
-      } else if (pdfRef.current.mozRequestFullScreen) { // Firefox
+      } else if (pdfRef.current.mozRequestFullScreen) {
         pdfRef.current.mozRequestFullScreen();
-      } else if (pdfRef.current.webkitRequestFullscreen) { // Chrome, Safari
+      } else if (pdfRef.current.webkitRequestFullscreen) {
         pdfRef.current.webkitRequestFullscreen();
-      } else if (pdfRef.current.msRequestFullscreen) { // IE/Edge
+      } else if (pdfRef.current.msRequestFullscreen) {
         pdfRef.current.msRequestFullscreen();
       }
     }
   };
+  
 
   return (
     <PDFWrapper>
