@@ -90,10 +90,10 @@ const ContentSection = styled.section`
   }
 
   .split-container {
-    display: flex;
-    justify-content: center;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 30px;
-    flex-wrap: wrap;
+    justify-content: center;
   }
 
   .card {
@@ -101,12 +101,12 @@ const ContentSection = styled.section`
     padding: 20px;
     border-radius: 15px;
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-    max-width: 400px;
     text-align: left;
     transition: transform 0.3s, box-shadow 0.3s;
     cursor: pointer;
     color: #333;
-    
+    max-width: 100%;
+
     &:hover {
       transform: translateY(-7px);
       box-shadow: 0 12px 25px rgba(0, 0, 0, 0.25);
@@ -114,7 +114,7 @@ const ContentSection = styled.section`
 
     img {
       width: 100%;
-      height: 220px;
+      height: 250px;
       border-radius: 12px;
       object-fit: cover;
       margin-bottom: 15px;
@@ -145,8 +145,8 @@ const HomePage = () => {
       </HeroSection>
 
       <ContentSection id="explore">
-        <h2>Explore Our Pages</h2>
-        <p>Delve into the resources we offer, from spiritual teachings to insightful articles.</p>
+        <h2 style={{color: '#cce0cd'}} >Explore Our Pages</h2>
+        <p style={{color: '#cce0cd'}} >Delve into the resources we offer, from spiritual teachings to insightful articles.</p>
 
         <div className="split-container">
           <div className="card">
@@ -160,15 +160,17 @@ const HomePage = () => {
             <h3>Insights & Articles</h3>
             <p>Gain knowledge through thought-provoking articles and insights.</p>
           </div>
+          
           <div className="card">
-            <img src="/images/nature2.jpg" alt="Insights & Articles" />
-            <h3>Insights & Articles</h3>
-            <p>Gain knowledge through thought-provoking articles and insights.</p>
+            <img src="/images/nature2.jpg" alt="Faith and Wisdom" />
+            <h3>Faith and Wisdom</h3>
+            <p>Discover the teachings that inspire and deepen your faith.</p>
           </div>
+          
           <div className="card">
-            <img src="/images/nature.jpg" alt="Insights & Articles" />
-            <h3>Insights & Articles</h3>
-            <p>Gain knowledge through thought-provoking articles and insights.</p>
+            <img src="/images/nature.jpg" alt="Journey of Peace" />
+            <h3>Journey of Peace</h3>
+            <p>Find inner peace through meditative and spiritual practices.</p>
           </div>
         </div>
       </ContentSection>
