@@ -27,7 +27,7 @@ const HeroSection = styled.section`
   overflow: hidden;
   box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.5);
   animation: ${fadeIn} 1s ease-in-out;
-  font-family: 'Poppins', sans-serif;
+  font-family: 'Roboto', sans-serif;
 
   .hero-content {
     max-width: 800px;
@@ -36,34 +36,32 @@ const HeroSection = styled.section`
   }
 
   h1 {
-    font-size: 4rem;
+    font-size: 3.5rem;
     font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 2px;
+    letter-spacing: 1px;
     margin-bottom: 20px;
   }
 
   p {
-    font-size: 1.6rem;
+    font-size: 1.5rem;
     margin-bottom: 30px;
   }
 
   .cta-button {
-    background: linear-gradient(90deg, #ff7f50, #ff4500);
+    background: linear-gradient(90deg, #ff9800, #e65100);
     color: #fff;
-    padding: 16px 45px;
-    font-size: 1.3rem;
+    padding: 14px 40px;
+    font-size: 1.2rem;
     font-weight: 700;
     border-radius: 30px;
     text-decoration: none;
     transition: 0.3s ease-in-out;
-    box-shadow: 0 4px 12px rgba(255, 127, 80, 0.5);
-    font-family: 'Poppins', sans-serif;
-    
+    box-shadow: 0 4px 12px rgba(255, 152, 0, 0.5);
+
     &:hover {
-      background: linear-gradient(90deg, #ff4500, #e63946);
+      background: linear-gradient(90deg, #e65100, #bf360c);
       transform: scale(1.05);
-      box-shadow: 0 6px 18px rgba(255, 69, 0, 0.6);
+      box-shadow: 0 6px 18px rgba(255, 87, 34, 0.6);
     }
   }
 `;
@@ -71,13 +69,13 @@ const HeroSection = styled.section`
 // Content Section
 const ContentSection = styled.section`
   padding: 100px 10%;
-  background: linear-gradient(180deg, #1e3c72, #2a5298);
+  background: linear-gradient(180deg, #1b1b2f, #1e3c72);
   text-align: center;
-  font-family: 'Poppins', sans-serif;
+  font-family: 'Roboto', sans-serif;
   color: white;
 
   h2 {
-    font-size: 3rem;
+    font-size: 2.8rem;
     font-weight: 700;
     margin-bottom: 20px;
     text-transform: uppercase;
@@ -94,46 +92,42 @@ const ContentSection = styled.section`
   .split-container {
     display: flex;
     justify-content: center;
-    gap: 40px;
+    gap: 30px;
     flex-wrap: wrap;
   }
 
   .card {
     background: white;
-    padding: 25px;
+    padding: 20px;
     border-radius: 15px;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-    max-width: 420px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    max-width: 400px;
     text-align: left;
     transition: transform 0.3s, box-shadow 0.3s;
     cursor: pointer;
     color: #333;
-    font-family: 'Poppins', sans-serif;
     
     &:hover {
       transform: translateY(-7px);
-      box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
+      box-shadow: 0 12px 25px rgba(0, 0, 0, 0.25);
     }
 
     img {
       width: 100%;
+      height: 220px;
       border-radius: 12px;
-      margin-bottom: 20px;
-      transition: transform 0.3s;
-    }
-
-    &:hover img {
-      transform: scale(1.05);
+      object-fit: cover;
+      margin-bottom: 15px;
     }
 
     h3 {
-      font-size: 1.9rem;
-      margin-bottom: 12px;
+      font-size: 1.8rem;
+      margin-bottom: 10px;
     }
 
     p {
       font-size: 1.2rem;
-      color: #555;
+      color: #444;
     }
   }
 `;
@@ -144,7 +138,7 @@ const HomePage = () => {
       <GlobalStyle />
       <HeroSection>
         <div className="hero-content">
-          <h1>Welcome to Sufi World</h1>
+          <h1>Welcome to Sulthaniya Family</h1>
           <p>Connect with knowledge, spirituality, and faith. Embark on a journey of wisdom and inner peace.</p>
           <a href="#explore" className="cta-button">Explore More</a>
         </div>
@@ -163,6 +157,16 @@ const HomePage = () => {
 
           <div className="card">
             <img src="/images/nature2.jpg" alt="Insights & Articles" />
+            <h3>Insights & Articles</h3>
+            <p>Gain knowledge through thought-provoking articles and insights.</p>
+          </div>
+          <div className="card">
+            <img src="/images/nature2.jpg" alt="Insights & Articles" />
+            <h3>Insights & Articles</h3>
+            <p>Gain knowledge through thought-provoking articles and insights.</p>
+          </div>
+          <div className="card">
+            <img src="/images/nature.jpg" alt="Insights & Articles" />
             <h3>Insights & Articles</h3>
             <p>Gain knowledge through thought-provoking articles and insights.</p>
           </div>

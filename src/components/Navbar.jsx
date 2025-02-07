@@ -119,7 +119,7 @@ const Navbar = () => {
 
   return (
     <NavbarWrapper>
-      <NavbarLogo onClick={() => setIsOpen(false)}>Sufi World</NavbarLogo>
+      <NavbarLogo onClick={() => setIsOpen(false)}>Sulthaniya</NavbarLogo>
       <ToggleButton onClick={() => setIsOpen(!isOpen)} className={isOpen ? 'open' : ''}>
         <div></div>
         <div></div>
