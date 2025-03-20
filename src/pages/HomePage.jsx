@@ -1,5 +1,5 @@
 import styled, { keyframes } from 'styled-components';
-import GlobalStyle from '../styles/GlobalStyles';
+
 
 // Background Animation
 const fadeIn = keyframes`
@@ -135,7 +135,6 @@ const ContentSection = styled.section`
 const HomePage = () => {
   return (
     <div>
-      <GlobalStyle />
       <HeroSection>
         <div className="hero-content">
           <h1 style={{color : '#ffff'}} >Welcome to Sulthaniya Family</h1>
