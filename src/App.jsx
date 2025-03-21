@@ -3,7 +3,7 @@ import HomePage from "./pages/HomePage";
 import AboutPage from "./pages/AboutPage";
 import PDFPage from "./pages/PDFPage";
 import Navbar from "./components/Navbar";
-import Footer from "./components/Footer"; // Ensure Footer is used
+import Footer from "./components/Footer";
 
 function App() {
   return (
@@ -14,7 +14,7 @@ function App() {
         <Route path="/about" element={<AboutPage />} />
         <Route path="/pdf" element={<PDFPage />} />
       </Routes>
-      <Footer /> {/* Added Footer Component */}
+      <Footer /> 
     </Router>
   );
 }
