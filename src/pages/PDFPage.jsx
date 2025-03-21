@@ -150,25 +150,13 @@ const PDFPage = () => {
           </div>
 
           <a
-  href={pdfFiles[activeTab].src}
-  download
-  target="_self"
-  className="w-full md:w-auto py-2 px-6 bg-indigo-600 hover:bg-indigo-700 text-white font-medium rounded-lg flex items-center justify-center shadow-md"
-  onClick={(e) => {
-    if (window.innerWidth <= 768) {
-      e.preventDefault();
-      const link = document.createElement("a");
-      link.href = pdfFiles[activeTab].src;
-      link.setAttribute("download", pdfFiles[activeTab].name);
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-    }
-  }}
->
-  <Download className="mr-2 h-5 w-5" />
-  <span>Download PDF</span>
-</a>
+            href={pdfFiles[activeTab].src}
+            download={pdfFiles[activeTab].name}
+            className="w-full md:w-auto py-2 px-6 bg-indigo-600 hover:bg-indigo-700 text-white font-medium rounded-lg flex items-center justify-center shadow-md"
+          >
+            <Download className="mr-2 h-5 w-5" />
+            <span>Download PDF</span>
+          </a>
         </div>
 
         <div ref={pdfRef} className="relative w-full h-[75vh] bg-white rounded-lg shadow-lg border overflow-hidden">
