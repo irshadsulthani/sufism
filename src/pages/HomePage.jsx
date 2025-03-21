@@ -63,9 +63,6 @@ const HomePage = () => {
       bgImage: "https://images.unsplash.com/photo-1609599006353-e629aaabfeae?auto=format&fit=crop&q=80&w=800"
     }
   ];
-
-
-
   
   // State for collection carousel
   const [currentCollectionIndex, setCurrentCollectionIndex] = useState(0);
