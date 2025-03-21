@@ -1,152 +1,21 @@
-import { useState, useRef } from 'react';
-import styled from 'styled-components';
-import { Worker, Viewer } from '@react-pdf-viewer/core';
-import '@react-pdf-viewer/core/lib/styles/index.css';
-
-const PDFWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: 20px;
-  height: 100vh;
-  background-color: #f4f4f9;
-  overflow: auto;
-  box-sizing: border-box;
-  font-family: 'Arial', sans-serif;
-
-  @media (max-width: 768px) {
-    padding: 15px;
-    height: auto;
-    min-height: 100vh;
-  }
-`;
-
-const ToggleContainer = styled.div`
-  margin-bottom: 20px;
-  display: flex;
-  justify-content: center;
-  width: 100%;
-  gap: 10px;
-
-  @media (max-width: 768px) {
-    flex-direction: column;
-    align-items: center;
-    width: 90%;
-  }
-`;
-
-const DropdownWrapper = styled.div`
-  position: relative;
-  display: inline-block;
-  width: 250px;
-
-  @media (max-width: 768px) {
-    width: 100%;
-  }
-`;
-
-const DropdownButton = styled.button`
-  width: 100%;
-  padding: 14px;
-  background-color: #007bff;
-  color: white;
-  font-size: 18px;
-  font-weight: 600;
-  border: none;
-  border-radius: 30px;
-  text-align: center;
-  cursor: pointer;
-  transition: background-color 0.3s, transform 0.3s;
-
-  &:hover {
-    background-color: #0056b3;
-    transform: scale(1.05);
-  }
-
-  @media (max-width: 768px) {
-    padding: 16px;
-    font-size: 16px;
-  }
-`;
-
-const DropdownList = styled.ul`
-  position: absolute;
-  top: 100%;
-  left: 0;
-  width: 100%;
-  max-height: 250px;
-  overflow-y: auto;
-  background-color: white;
-  border: 1px solid #ddd;
-  border-radius: 10px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  z-index: 100;
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity 0.3s, visibility 0.3s;
-
-  &.show {
-    opacity: 1;
-    visibility: visible;
-  }
-
-  @media (max-width: 768px) {
-    max-height: 200px;
-  }
-`;
-
-const DropdownItem = styled.li`
-  padding: 12px 15px;
-  font-size: 16px;
-  color: #007bff;
-  cursor: pointer;
-  transition: background-color 0.2s;
-  text-align: center;
-
-  &:hover {
-    background-color: #f0f0f0;
-  }
-
-  &.selected {
-    background-color: #007bff;
-    color: white;
-  }
-
-  @media (max-width: 768px) {
-    padding: 14px;
-    font-size: 18px;
-  }
-`;
-
-const PDFContainer = styled.div`
-  width: 100%;
-  height: 80vh;
-  max-width: 900px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  border-radius: 10px;
-  overflow: hidden;
-  background-color: white;
-  cursor: pointer;
-
-  @media (max-width: 768px) {
-    height: 65vh;
-    width: 90%;
-  }
-`;
-
+import { useState, useRef, useEffect } from "react";
+import { Worker, Viewer } from "@react-pdf-viewer/core";
+import "@react-pdf-viewer/core/lib/styles/index.css";
+import { ChevronDown, Download, Maximize } from "lucide-react";
 
 const pdfFiles = [
   { src: "/pdf/sample.pdf", name: "Sample PDF" },
   { src: "/pdf/majlisbaith.pdf", name: "Majlis Baith" },
-  { src: "/pdf/sample3.pdf", name: "Sample 3" }
+  { src: "/pdf/sample3.pdf", name: "Sample 3" },
 ];
 
 const PDFPage = () => {
   const [activeTab, setActiveTab] = useState(0);
   const [pdfName, setPdfName] = useState(pdfFiles[0].name);
   const [showDropdown, setShowDropdown] = useState(false);
+  const [isFullscreen, setIsFullscreen] = useState(false);
   const pdfRef = useRef(null);
+  const dropdownRef = useRef(null);
 
   const toggleDropdown = () => {
     setShowDropdown(!showDropdown);
@@ -159,47 +28,111 @@ const PDFPage = () => {
   };
 
   const openFullScreen = () => {
-    if (window.innerWidth <= 768) { // Detect mobile screens
+    if (window.innerWidth <= 768) {
       window.open(pdfFiles[activeTab].src, "_blank");
-    } else if (pdfRef.current) { // Desktop fullscreen mode
-      if (pdfRef.current.requestFullscreen) {
-        pdfRef.current.requestFullscreen();
-      } else if (pdfRef.current.mozRequestFullScreen) {
-        pdfRef.current.mozRequestFullScreen();
-      } else if (pdfRef.current.webkitRequestFullscreen) {
-        pdfRef.current.webkitRequestFullscreen();
-      } else if (pdfRef.current.msRequestFullscreen) {
-        pdfRef.current.msRequestFullscreen();
+    } else if (pdfRef.current) {
+      setIsFullscreen(true);
+      try {
+        if (pdfRef.current.requestFullscreen) {
+          pdfRef.current.requestFullscreen();
+        } else if (pdfRef.current.mozRequestFullScreen) {
+          pdfRef.current.mozRequestFullScreen();
+        } else if (pdfRef.current.webkitRequestFullscreen) {
+          pdfRef.current.webkitRequestFullscreen();
+        } else if (pdfRef.current.msRequestFullscreen) {
+          pdfRef.current.msRequestFullscreen();
+        }
+      } catch (err) {
+        console.error("Error attempting to enable fullscreen:", err);
       }
     }
   };
-  
+
+  useEffect(() => {
+    const handleFullscreenChange = () => {
+      if (!document.fullscreenElement) {
+        setIsFullscreen(false);
+      }
+    };
+
+    document.addEventListener("fullscreenchange", handleFullscreenChange);
+    return () => {
+      document.removeEventListener("fullscreenchange", handleFullscreenChange);
+    };
+  }, []);
 
   return (
-    <PDFWrapper>
-      <ToggleContainer>
-        <DropdownWrapper>
-          <DropdownButton onClick={toggleDropdown}>{pdfName}</DropdownButton>
-          <DropdownList className={showDropdown ? 'show' : ''}>
-            {pdfFiles.map((file, index) => (
-              <DropdownItem
-                key={index}
-                className={activeTab === index ? 'selected' : ''}
-                onClick={() => handleSelectFile(index)}
-              >
-                {file.name}
-              </DropdownItem>
-            ))}
-          </DropdownList>
-        </DropdownWrapper>
-      </ToggleContainer>
+    <div className="flex flex-col items-center justify-start min-h-screen w-full bg-slate-50 p-4 md:p-6">
+      <div className="w-full max-w-4xl flex flex-col items-center">
+        <h1 className="text-2xl md:text-3xl font-bold text-gray-800 mb-6">PDF Document Viewer</h1>
 
-      <PDFContainer ref={pdfRef} onClick={openFullScreen}>
-        <Worker workerUrl={`https://unpkg.com/pdfjs-dist@3.11.174/build/pdf.worker.min.js`}>
-          <Viewer fileUrl={pdfFiles[activeTab].src} />
-        </Worker>
-      </PDFContainer>
-    </PDFWrapper>
+        {/* File selector dropdown */}
+        <div className="relative w-full max-w-xs mb-6" ref={dropdownRef}>
+          <button
+            onClick={toggleDropdown}
+            className="w-full py-3 px-5 bg-indigo-600 hover:bg-indigo-700 text-white font-medium rounded-lg flex items-center justify-between transition-all duration-200 shadow-md"
+          >
+            <span className="truncate max-w-[90%]">{pdfName}</span>
+            <ChevronDown
+              className={`ml-2 h-4 w-4 transition-transform duration-200 ${
+                showDropdown ? "rotate-180" : ""
+              }`}
+            />
+          </button>
+
+          {showDropdown && (
+            <ul className="absolute mt-1 w-full bg-white rounded-lg shadow-lg overflow-hidden border border-gray-200 z-50 max-h-60 overflow-y-auto">
+              {pdfFiles.map((file, index) => (
+                <li
+                  key={index}
+                  onClick={() => handleSelectFile(index)}
+                  className={`py-2 px-4 hover:bg-gray-100 cursor-pointer transition-colors duration-200 ${
+                    activeTab === index ? "bg-indigo-100 font-medium text-indigo-800" : "text-gray-700"
+                  }`}
+                >
+                  {file.name}
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
+
+        {/* PDF Viewer Container */}
+        <div
+          ref={pdfRef}
+          onClick={openFullScreen}
+          className={`relative w-full ${
+            isFullscreen ? "fixed inset-0 h-screen w-screen bg-white z-50 overflow-auto" : "h-[70vh] rounded-lg shadow-lg border border-gray-200 overflow-hidden"
+          }`}
+        >
+          {/* Fullscreen Overlay */}
+          {!isFullscreen && (
+            <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-10 flex items-center justify-center transition-all duration-300 z-10">
+              <Maximize className="text-white opacity-0 group-hover:opacity-100 h-10 w-10 transition-opacity duration-300" />
+            </div>
+          )}
+
+          {/* PDF Viewer */}
+          <div className="h-full overflow-auto">
+            <Worker workerUrl={`https://unpkg.com/pdfjs-dist@3.11.174/build/pdf.worker.min.js`}>
+              <Viewer fileUrl={pdfFiles[activeTab].src} />
+            </Worker>
+          </div>
+        </div>
+
+        {/* Download Button */}
+        <a
+          href={pdfFiles[activeTab].src}
+          download={pdfFiles[activeTab].name}
+          className="mt-5 py-3 px-6 bg-emerald-600 hover:bg-emerald-700 text-white font-medium rounded-lg inline-flex items-center justify-between transition-all duration-200 shadow-md w-full max-w-xs"
+        >
+          <span className="flex items-center">
+            <Download className="mr-2 h-5 w-5" />
+            <span className="truncate max-w-[90%]">Download {pdfName}</span>
+          </span>
+        </a>
+      </div>
+    </div>
   );
 };
 
