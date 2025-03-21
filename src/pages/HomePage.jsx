@@ -64,6 +64,9 @@ const HomePage = () => {
     }
   ];
 
+
+
+  
   // State for collection carousel
   const [currentCollectionIndex, setCurrentCollectionIndex] = useState(0);
   const [isAnimating, setIsAnimating] = useState(false);
